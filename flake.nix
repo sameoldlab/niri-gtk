@@ -1,28 +1,32 @@
 {
-  outputs = {
-    self,
-    nixpkgs,
-  }: let
-    forAllSystems = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"];
-  in {
-    packages = forAllSystems (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-      mkPkg = src:
-        import src {
-          inherit self pkgs;
-          mkAstalPkg = import ./nix/mkAstalPkg.nix pkgs;
-        };
-    in {
-      default = self.packages.${system}.io;
-      niri = mkPkg ./src;
-    });
+  outputs =
+    { nixpkgs, ... }:
+    let
+      forAllSystems = nixpkgs.lib.genAttrs [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+    in
+    {
+      packages = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        rec {
+          default = niri;
+          niri = pkgs.callPackage ./nix/package.nix { };
+        }
+      );
 
-    devShells = forAllSystems (system:
-      import ./nix/devshell.nix {
-        inherit self;
-        pkgs = nixpkgs.legacyPackages.${system};
-      });
-  };
+      devShells = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        pkgs.callPackage ./nix/devshell.nix { }
+      );
+    };
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
