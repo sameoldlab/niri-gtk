@@ -6,7 +6,7 @@ struct ParameterFunc {
   ParameterFuncDelegate build;
 }
 
-public class msg : Object {
+public class Message : Object {
     private static ParameterFunc array_member(string name, ParameterFunc[] items) {
       return member(name, array_value(items));
     }
@@ -883,4 +883,8 @@ public class msg : Object {
       return send_act("UnsetWorkspaceName", serialize_fields({ obj_member("reference", { str_member("Name", workspace_name) })}));
     }
 }
+
+[Version (deprecated = true, deprecated_since = "0.2")]
+public class msg : Message {}
+
 }
