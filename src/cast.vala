@@ -89,7 +89,7 @@ public class Cast : Object {
     }
 
     public bool stop() {
-        return msg.stop_cast((int)stream_id);
+        return Message.stop_cast((int)stream_id);
     }
 }
 }

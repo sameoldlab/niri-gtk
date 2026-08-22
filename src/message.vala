@@ -883,8 +883,4 @@ public class Message : Object {
       return send_act("UnsetWorkspaceName", serialize_fields({ obj_member("reference", { str_member("Name", workspace_name) })}));
     }
 }
-
-[Version (deprecated = true, deprecated_since = "0.2")]
-public class msg : Message {}
-
 }

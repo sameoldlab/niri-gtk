@@ -13,7 +13,6 @@ public class Niri : Object {
     internal HashTable<uint64?, Cast>  _casts =
         new HashTable<uint64?,  Cast> (int64_hash, int64_equal);
 
-
     Array<string> keyboard_layouts { get; private set; }
 
     public uint8 keyboard_layout_idx { get; private set; }
@@ -101,7 +100,7 @@ public class Niri : Object {
         keyboard_layouts = new Array<string>();
         overview = new Overview();
 
-        var outputs = Json.from_string(msg.send("\"Outputs\""))
+        var outputs = Json.from_string(Message.send("\"Outputs\""))
             .get_object()
             .get_object_member("Ok")
             .get_object_member("Outputs");
@@ -113,7 +112,7 @@ public class Niri : Object {
             _outputs.insert(name, output);
         }
 
-        var workspaces = Json.from_string(msg.send("\"Workspaces\""))
+        var workspaces = Json.from_string(Message.send("\"Workspaces\""))
             .get_object()
             .get_object_member("Ok")
             .get_array_member("Workspaces");
@@ -126,7 +125,7 @@ public class Niri : Object {
                 update_focused_workspace(workspace.id);
         }
 
-        var windows = Json.from_string(msg.send("\"Windows\""))
+        var windows = Json.from_string(Message.send("\"Windows\""))
             .get_object()
             .get_object_member("Ok")
             .get_array_member("Windows");
@@ -139,7 +138,7 @@ public class Niri : Object {
                 update_focused_window(window.id);
         }
 
-        var casts = Json.from_string(msg.send("\"Casts\""))
+        var casts = Json.from_string(Message.send("\"Casts\""))
             .get_object()
             .get_object_member("Ok")
             .get_array_member("Casts");
@@ -379,7 +378,7 @@ public class Niri : Object {
         _outputs.remove_all();
         Json.Node node;
         try {
-            node = Json.from_string(yield msg.send_async("\"Outputs\""));
+            node = Json.from_string(yield Message.send_async("\"Outputs\""));
             if(node == null) return;
         } catch (Error err) {
             critical("msg %s", err.message);

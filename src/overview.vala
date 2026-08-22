@@ -7,7 +7,7 @@ public class Overview : Object {
     }
 
     public async bool toggle() {
-        return AstalNiri.msg.toggle_overview();
+        return AstalNiri.Message.toggle_overview();
     }
 
     internal void sync(Json.Object object) {

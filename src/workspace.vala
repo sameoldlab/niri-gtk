@@ -81,13 +81,13 @@ public class Workspace : Object {
     }
 
     public bool focus() {
-       return msg.focus_workspace_by_id((int) id);
+       return Message.focus_workspace_by_id((int) id);
     }
     public bool rename(string name) {
-        return msg.set_workspace_name_by_id((int) id, name);
+        return Message.set_workspace_name_by_id((int) id, name);
     }
     public bool move_to_monitor(string output) {
-        return msg.move_workspace_to_monitor_by_id(output, (int) id);
+        return Message.move_workspace_to_monitor_by_id(output, (int) id);
     }
 }
 }

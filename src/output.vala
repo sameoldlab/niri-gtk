@@ -66,11 +66,11 @@ public class Output : Object {
     }
 
     public bool set_dynamic_cast() {
-        return msg.set_dynamic_cast_monitor(name);
+        return Message.set_dynamic_cast_monitor(name);
     }
 
     public bool focus() {
-       return msg.focus_monitor(name);
+       return Message.focus_monitor(name);
     }
 }
 }

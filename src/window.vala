@@ -59,28 +59,28 @@ public class Window : Object {
     }
 
     public bool focus() {
-        return msg.focus_window((int)id);
+        return Message.focus_window((int)id);
     }
 
     public bool close() {
-        return msg.close_window((int)id);
+        return Message.close_window((int)id);
     }
 
     public bool set_dynamic_cast() {
-        return msg.set_dynamic_cast_window((int)id);
+        return Message.set_dynamic_cast_window((int)id);
     }
 
     public bool set_urgency(bool new_urgency) {
         if (is_urgent == new_urgency) return true;
-        return msg.toggle_window_urgent((int) id);
+        return Message.toggle_window_urgent((int) id);
     }
 
     public bool move_to_workspace(int workspace_id, bool? focus = false) {
-        return msg.move_window_to_workspace_by_id((int) id, workspace_id, focus);
+        return Message.move_window_to_workspace_by_id((int) id, workspace_id, focus);
     }
 
     public bool move_to_monitor(string output) {
-        return msg.move_window_to_monitor((int) id, output);
+        return Message.move_window_to_monitor((int) id, output);
     }
 }
 }
